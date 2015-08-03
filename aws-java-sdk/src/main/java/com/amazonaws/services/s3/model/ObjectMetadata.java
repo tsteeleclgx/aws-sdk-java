@@ -602,7 +602,12 @@ public class ObjectMetadata implements ServerSideEncryptionResult,
      *         Returns <code>null</code> if it hasn't been set yet.
      */
     public String getETag() {
-        return (String)metadata.get(Headers.ETAG);
+        String value = (String)metadata.get(Headers.ETAG);
+        if (value ==  null) {
+            value = (String)metadata.get("Etag");
+            value = value.substring(1,value.length()-1);
+        }
+        return value;
     }
 
     /**
