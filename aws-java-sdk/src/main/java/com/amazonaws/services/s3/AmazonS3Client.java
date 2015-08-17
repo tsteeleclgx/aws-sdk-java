@@ -2324,6 +2324,8 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
             "The policy text must be specified when setting a bucket policy");
 
         Request<GenericBucketRequest> request = createRequest(bucketName, null, new GenericBucketRequest(bucketName), HttpMethodName.PUT);
+        // hack for Riak
+        request.addHeader("Content-Type","application/json");
         request.addParameter("policy", null);
         request.setContent(new ByteArrayInputStream(ServiceUtils.toByteArray(policyText)));
 
